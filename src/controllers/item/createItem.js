@@ -5,18 +5,14 @@ const createItemHandler = async (req, res) => {
   const t = await sequelize.transaction();
   try {
     const { itemName } = req.body;
-    console.log(
-      "--------------------------------------->>>>>>>>>>>>>",
-      itemName,
-      req.body
-    );
-    const checkListId = req.params.id;
-    const checkListItem = await CheckListItem.create(
-      { name: itemName, checkListId },
+    const checklistId = req.params.id;
+    const checklistItem = await CheckListItem.create(
+      { name: itemName, checklistId },
       { transaction: t }
     );
+
     await t.commit();
-    return res.sendSuccess(201, checkListItem);
+    return res.sendSuccess(201, checklistItem);
   } catch (error) {
     await t.rollback();
     console.log(error);

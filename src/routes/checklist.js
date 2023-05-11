@@ -1,5 +1,5 @@
 const createChecklistHandler = require("../controllers/checklist/createChecklist");
-const deleteChecklistHanlder = require("../controllers/checklist/deleteCheckList");
+const deleteChecklistHanlder = require("../controllers/checklist/deleteChecklist");
 const getAllHandler = require("../controllers/checklist/getAll");
 const createItemHandler = require("../controllers/item/createItem");
 const isLogin = require("../middlewares/isLogin");
