@@ -1,11 +1,15 @@
 const sequelize = require("../../configs/sequelize");
+const CheckListItem = require("../../models/checkListItem");
 const Checklist = require("../../models/checklist");
 
 const getAllHandler = async (req, res) => {
   const t = await sequelize.transaction();
   try {
     const userId = req.payload.id;
-    const checkLists = await Checklist.findAll({ where: { userId } });
+    const checkLists = await Checklist.findAll({
+      where: { userId },
+      include: [{ model: CheckListItem, attributes: ["name", "status"] }],
+    });
     if (checkLists.length <= 0)
       return res.sendClientError(404, "Checklist not found");
     await t.commit();
